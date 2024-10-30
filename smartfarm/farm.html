@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Farm Main Screen</title>
+    <link rel="stylesheet" href="farmstyle.css">
+</head>
+<body>
+    <div class="header">
+        <div class="menu-icon">☰</div>
+    </div>
+    <div class="main-content">
+        <p>설명 들어갈 예정입니다<br>설명 들어갈 예정입니다<br>설명 들어갈 예정입니다<br>설명 들어갈 예정입니다<br>설명 들어갈 예정입니다</p>
+        <div class="grid-container">
+            <div class="grid-item" onclick="navigateTo('temperature')">
+                <img src="thermometer-icon.png" alt="Temperature">
+            </div>
+            <div class="grid-item" onclick="navigateTo('water')">
+                <img src="water-icon.png" alt="Water">
+            </div>
+            <div class="grid-item" onclick="navigateTo('light')">
+                <img src="light-icon.png" alt="Light">
+            </div>
+            <div class="grid-item" onclick="openGPTChat()">
+                <img src="other-icon.png" alt="GPT">
+            </div>
+        </div>
+    </div>
+    
+    <script src="framjava.js"></script>
+    <script>
+        function openGPTChat() {
+            window.open('GPT.html', '_blank', 'width=600,height=800'); // 새 창에서 GPT.html 열기
+        }
+    </script>
+</body>
+</html>
