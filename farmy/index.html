@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/logo/favicon.svg">
+    <title>Farmy</title>
+    <link rel="stylesheet" href="css/farmstyle.css">
+    <link rel="stylesheet" type="text/css"
+        href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css'>
+    <link rel="stylesheet" type="text/css" href="css/styleguide.css" />
+</head>
+
+<body>
+    <div class="header">
+        <img class="logo" src="img/logo/sublogo.png" alt="logo" />
+        <div class="plantbox">
+            <div class="plantoverlap">
+                <img class="green-bean" src="icon/green bean.svg" />
+                <div class="intofo">강낭이</div>
+
+            </div>
+        </div>
+    </div>
+    <div class="main-content">
+
+        <div class="grid-container">
+            <div class="grid-item" onclick="navigateTo('temperature')">
+                <img src="thermometer-icon.png" alt="Temperature">
+            </div>
+            <div class="grid-item" onclick="navigateTo('water')">
+                <img src="water-icon.png" alt="Water">
+            </div>
+            <div class="grid-item" onclick="navigateTo('light')">
+                <img src="light-icon.png" alt="Light">
+            </div>
+            <div class="grid-item" onclick="openGPTChat()">
+                <img src="other-icon.png" alt="GPT">
+            </div>
+            <div class="grid-item" onclick="openGPTChat()">
+                <img src="other-icon.png" alt="GPT">
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footerbox">
+            <div class="footerwritebox">
+                <div class="footermini">Farmy는 스마트팜 관리 앱으로, 온도, 습도, 조도, <br />토양 수분을 언제 어디서나 간편하게 모니터링하고
+                    <br />제어할 수 있습니다. Chat GPT를 활용하여 <br />실시간 환경 데이터와 맞춤형 조언을 제공해 <br />건강한 작물 성장을
+                    돕는 스마트팜 파트너입니다.
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="copyword">ⓒ 2024. E2I1 All rights reserved.</div>
+        </div>
+    </div>
+
+    <script src="framjava.js"></script>
+    <script>
+        function openGPTChat() {
+            window.open('GPT.html', '_blank', 'width=600,height=800'); // 새 창에서 GPT.html 열기
+        }
+    </script>
+</body>
+
+</html>

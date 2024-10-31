@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPT 채팅</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .chat-container {
+            max-width: 600px;
+            margin: auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: white;
+        }
+        .messages {
+            height: 400px;
+            overflow-y: scroll;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            background-color: #f0f0f0;
+        }
+        .input-area {
+            display: flex;
+            padding: 10px;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        button {
+            padding: 10px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            border-radius: 3px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="messages" id="messages">
+        <!-- 채팅 메시지가 여기에 표시됩니다 -->
+    </div>
+    <div class="input-area">
+        <input type="text" id="userInput" placeholder="메시지를 입력하세요..." />
+        <button onclick="sendMessage()">전송</button>
+    </div>
+</div>
+
+<script>
+    function sendMessage() {
+        const input = document.getElementById('userInput');
+        const message = input.value;
+        if (message.trim() === "") return;
+
+        // 사용자의 메시지 표시
+        const messagesDiv = document.getElementById('messages');
+        messagesDiv.innerHTML += `<div>User: ${message}</div>`;
+
+        // GPT의 응답 시뮬레이션
+        setTimeout(() => {
+            const response = "이곳에 GPT의 응답이 표시됩니다."; // 실제 GPT 응답으로 교체할 수 있습니다.
+            messagesDiv.innerHTML += `<div>GPT: ${response}</div>`;
+            messagesDiv.scrollTop = messagesDiv.scrollHeight; // 아래로 스크롤
+        }, 1000);
+
+        // 입력 필드 초기화
+        input.value = "";
+    }
+</script>
+
+</body>
+</html>
