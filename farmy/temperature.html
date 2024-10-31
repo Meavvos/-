@@ -4,21 +4,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Temperature Settings</title>
-    <link rel="stylesheet" href="farmstyle.css">
+    <link rel="icon" href="img/logo/favicon.svg">
+    <title>온도 설정 - Farmy</title>
+    <link rel="stylesheet" href="css/farmstyle.css">
+    <link rel="stylesheet" type="text/css" href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css'>
+    <link rel="stylesheet" type="text/css" href="css/styleguide.css" />
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 28px; /* 폰트 크기 조정 */
+        }
+
+        .current-temp {
+            font-size: 24px; /* 현재 온도 크기 */
+            margin: 10px 0;
+        }
+
+        .slider {
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .temp-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: -10px; /* 슬라이더와의 간격 조정 */
+        }
+
+        .back-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .info-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            flex: 2; /* 칸을 균등하게 배분 */
+            background-color: #e0e0e0; /* 배경 색상 */
+            margin: 0 15px; /* 간격 */
+            padding: 25px;
+            border-radius: 10px;
+            position: relative; /* 자식 요소의 절대 위치를 위해 설정 */
+        }
+
+        .info-status {
+            position: absolute;
+            bottom: 7px; /* 박스의 아래쪽에 위치 */
+            left: 50%;
+            transform: translateX(-50%); /* 중앙 정렬 */
+            font-size: 15px; /* 상태 텍스트 크기 */
+        }
+    </style>
 </head>
 
 <body>
-    <div class="temperature-popup">
-        <div class="temperature-header">
-            <img src="thermometer-icon.png" alt="Temperature Icon" class="temperature-icon">
-            <p>Temperature</p>
+    <div class="container">
+        <h1 id="realTimeTemp">현재 온도: -10도</h1> <!-- 실시간 온도를 표시할 곳 -->
+        
+        <!-- 4개의 정보 박스 추가 -->
+        <div class="info-container">
+            <div class="info-box" id="tempInfo">온도<div class="info-status">(0 도)</div></div>
+            <div class="info-box" id="humidityInfo">습도<div class="info-status">(on/off)</div></div>
+            <div class="info-box" id="lightInfo">조도<div class="info-status">(on/off)</div></div>
+            <div class="info-box" id="moistureInfo">수분<div class="info-status">(0%)</div></div>
         </div>
-        <div class="slider-container">
-            <input type="range" min="0" max="50" value="25" class="slider">
-            <input type="range" min="0" max="50" value="25" class="slider">
+
+        <img src="icon/Temperature.png" alt="온도 아이콘" class="icon"> <!-- 온도 아이콘 추가 -->
+        <div class="current-temp" id="currentTemp">설정 온도: 20도</div>
+        <input type="range" min="0" max="30" value="20" class="slider" id="tempSlider">
+        
+        <!-- 온도 레이블 추가 -->
+        <div class="temp-labels">
+            <span>0도</span>
+            <span>30도</span>
         </div>
+        <button class="back-button" onclick="goBack()">뒤로 가기</button>
     </div>
+
+    <script>
+        const slider = document.getElementById('tempSlider');
+        const currentTemp = document.getElementById('currentTemp');
+
+        // 슬라이더 값이 변경될 때마다 현재 온도를 업데이트
+        slider.oninput = function() {
+            currentTemp.innerHTML = `설정 온도: ${this.value}도`;
+        };
+
+        // 아두이노에서 실시간 정보를 가져오는 함수 (예시)
+        function updateRealTimeData() {
+            // 실제 아두이노 API를 호출하거나 온도를 받아오는 코드를 구현해야 합니다
+            // 아래는 임의의 값을 생성하는 코드
+            const realTimeTemp = Math.floor(Math.random() * 31); // 0도에서 30도 사이의 임의의 온도
+            const humidity = Math.floor(Math.random() * 100); // 0%에서 100% 사이의 임의의 습도
+            const lightStatus = Math.random() < 0.5 ? 'on' : 'off'; // 임의의 조도 상태
+            const moisture = Math.floor(Math.random() * 100); // 0%에서 100% 사이의 임의의 수분
+
+            // 실제 값으로 UI 업데이트
+            document.getElementById('realTimeTemp').innerHTML = `현재 온도: ${realTimeTemp}도`;
+            document.getElementById('tempInfo').querySelector('.info-status').innerHTML = `(${realTimeTemp} 도)`;
+            document.getElementById('humidityInfo').querySelector('.info-status').innerHTML = `(${humidity}%)`;
+            document.getElementById('lightInfo').querySelector('.info-status').innerHTML = `(${lightStatus})`;
+            document.getElementById('moistureInfo').querySelector('.info-status').innerHTML = `(${moisture}%)`;
+        }
+
+        // 페이지 로드 시 실시간 온도 및 정보 업데이트
+        window.onload = function() {
+            setInterval(updateRealTimeData, 5000); // 5초마다 실시간 데이터 업데이트
+        };
+
+        // 뒤로 가기 함수
+        function goBack() {
+            window.history.back(); // 이전 페이지로 돌아가기
+        }
+    </script>
 </body>
 
 </html>

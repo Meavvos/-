@@ -19,27 +19,22 @@
             <div class="plantoverlap">
                 <img class="green-bean" src="icon/green bean.svg" />
                 <div class="intofo">강낭이</div>
-
             </div>
         </div>
     </div>
     <div class="main-content">
-
         <div class="grid-container">
             <div class="grid-item" onclick="navigateTo('temperature')">
-                <img src="thermometer-icon.png" alt="Temperature">
+                <img src="icon/Temperature.png" alt="Temperature">
             </div>
             <div class="grid-item" onclick="navigateTo('water')">
-                <img src="water-icon.png" alt="Water">
+                <img src="icon/water.png" alt="Water">
             </div>
             <div class="grid-item" onclick="navigateTo('light')">
-                <img src="light-icon.png" alt="Light">
+                <img src="icon/Lightbulb.png" alt="Light">
             </div>
             <div class="grid-item" onclick="openGPTChat()">
-                <img src="other-icon.png" alt="GPT">
-            </div>
-            <div class="grid-item" onclick="openGPTChat()">
-                <img src="other-icon.png" alt="GPT">
+                <img src="icon/gpt.png" alt="GPT">
             </div>
         </div>
     </div>
@@ -61,6 +56,17 @@
     <script>
         function openGPTChat() {
             window.open('GPT.html', '_blank', 'width=600,height=800'); // 새 창에서 GPT.html 열기
+        }
+
+        // navigateTo 함수 추가
+        function navigateTo(page) {
+            if (page === 'temperature') {
+                window.location.href = 'temperature.html'; // 온도 설정 페이지
+            } else if (page === 'water') {
+                window.location.href = 'water.html'; // 물 설정 페이지
+            } else if (page === 'light') {
+                window.location.href = 'light.html'; // 조명 설정 페이지
+            }
         }
     </script>
 </body>
