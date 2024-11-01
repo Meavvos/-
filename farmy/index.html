@@ -27,11 +27,14 @@
             <div class="grid-item" onclick="navigateTo('temperature')">
                 <img src="icon/Temperature.png" alt="Temperature">
             </div>
-            <div class="grid-item" onclick="navigateTo('water')">
-                <img src="icon/water.png" alt="Water">
+            <div class="grid-item" onclick="navigateTo('fan')">
+                <img src="icon/fan.svg" alt="fan">
             </div>
             <div class="grid-item" onclick="navigateTo('light')">
                 <img src="icon/Lightbulb.png" alt="Light">
+            </div>
+            <div class="grid-item" onclick="navigateTo('Soil moisture')">
+                <img src="icon/Soil moisture.png" alt="Light">
             </div>
             <div class="grid-item" onclick="openGPTChat()">
                 <img src="icon/gpt.png" alt="GPT">
@@ -62,11 +65,13 @@
         function navigateTo(page) {
             if (page === 'temperature') {
                 window.location.href = 'temperature.html'; // 온도 설정 페이지
-            } else if (page === 'water') {
-                window.location.href = 'water.html'; // 물 설정 페이지
+            } else if (page === 'fan') {
+                window.location.href = 'humidity.html'; // 물 설정 페이지
             } else if (page === 'light') {
                 window.location.href = 'light.html'; // 조명 설정 페이지
-            }
+            } else if (page === 'Soil moisture') {
+                window.location.href = 'Soil moisture.html'; // 물 설정 페이지
+            } 
         }
     </script>
 </body>
