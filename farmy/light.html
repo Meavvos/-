@@ -6,17 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="img/logo/favicon.svg">
     <title>설정 - Farmy</title>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
     <style>
         body {
             font-family: 'Pretendard', sans-serif;
             margin: 0;
-            padding: 20px;
-            background-color: #f9f9f9;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 400px;
             margin: 0 auto;
             text-align: center;
         }
@@ -28,13 +27,16 @@
 
         .status {
             font-size: 20px;
-            color: #4CAF50; /* 기본 상태 - On */
+            color: #4CAF50;
+            /* 기본 상태 - On */
             margin: 5px 0;
-            transition: color 0.3s ease; /* 색상 전환 애니메이션 */
+            transition: color 0.3s ease;
+            /* 색상 전환 애니메이션 */
         }
 
         .status.off {
-            color: #f44336; /* Off 상태일 때 */
+            color: #f44336;
+            /* Off 상태일 때 */
         }
 
         .switch {
@@ -74,77 +76,29 @@
             transition: 0.4s;
         }
 
-        input:checked + span {
+        input:checked+span {
             background-color: #4CAF50;
         }
 
-        input:checked + span:before {
+        input:checked+span:before {
             transform: translateX(26px);
-        }
-
-        .back-button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: transform 0.2s, background-color 0.2s;
-        }
-
-        .back-button:hover {
-            background-color: #45a049;
-            transform: scale(1.05);
-        }
-
-        .info-container {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .info-box {
-            flex: 2;
-            background-color: #e0e0e0;
-            margin: 0 15px;
-            padding: 25px;
-            border-radius: 10px;
-            position: relative;
-        }
-
-        .info-status {
-            position: absolute;
-            bottom: 7px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 15px;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1 id="realTimeTemp">현재 온도: 0도</h1>
+        <h1 id="realTimeTemp">현재 조도: 0°C</h1>
 
-        <!-- 4개의 정보 박스 추가 -->
-        <div class="info-container">
-            <div class="info-box" id="tempInfo">온도<div class="info-status">(0 도)</div></div>
-            <div class="info-box" id="humidityInfo">습도<div class="info-status">(0%)</div></div>
-            <div class="info-box" id="lightInfo">조명<div class="info-status">(off)</div></div>
-            <div class="info-box" id="moistureInfo">수분<div class="info-status">(0%)</div></div>
-        </div>
 
         <!-- 조명 상태 표시 및 토글 -->
         <img src="icon/Lightbulb.png" alt="조명 아이콘" class="icon">
-        <div class="status" id="lightStatus">조명: Off</div>
+        <div class="status" id="lightStatus">조명: OFF</div>
         <label class="switch">
             <input type="checkbox" id="lightToggle">
             <span></span>
         </label>
 
-        <br>
-        <button class="back-button" onclick="goBack()">뒤로 가기</button>
     </div>
 
     <script>
@@ -152,8 +106,8 @@
         const lightStatus = document.getElementById('lightStatus');
 
         // Toggle 조명 상태 표시
-        lightToggle.onchange = function() {
-            lightStatus.innerHTML = `조명 상태: ${this.checked ? 'On' : 'Off'}`;
+        lightToggle.onchange = function () {
+            lightStatus.innerHTML = `조명 상태: ${this.checked ? 'ON' : 'OFF'}`;
             lightStatus.classList.toggle('off', !this.checked);
         };
 
@@ -161,26 +115,22 @@
         function updateRealTimeData() {
             const realTimeTemp = Math.floor(Math.random() * 31); // 0도에서 30도 사이의 임의의 온도
             const humidity = Math.floor(Math.random() * 100); // 0%에서 100% 사이의 임의의 습도
-            const lightStatusText = lightToggle.checked ? 'on' : 'off'; // 조명 상태
+            const lightStatusText = lightToggle.checked ? 'ON' : 'OFF'; // 조명 상태
             const moisture = Math.floor(Math.random() * 100); // 0%에서 100% 사이의 임의의 수분
 
             // 실제 값으로 UI 업데이트
-            document.getElementById('realTimeTemp').innerHTML = `현재 온도: ${realTimeTemp}도`;
-            document.getElementById('tempInfo').querySelector('.info-status').innerHTML = `(${realTimeTemp} 도)`;
+            document.getElementById('realTimeTemp').innerHTML = `현재 온도: ${realTimeTemp}°C`;
+            document.getElementById('tempInfo').querySelector('.info-status').innerHTML = `(${realTimeTemp} °C)`;
             document.getElementById('humidityInfo').querySelector('.info-status').innerHTML = `(${humidity}%)`;
             document.getElementById('lightInfo').querySelector('.info-status').innerHTML = `(${lightStatusText})`;
             document.getElementById('moistureInfo').querySelector('.info-status').innerHTML = `(${moisture}%)`;
         }
 
         // 페이지 로드 시 실시간 온도 및 정보 업데이트
-        window.onload = function() {
+        window.onload = function () {
             setInterval(updateRealTimeData, 5000); // 5초마다 실시간 데이터 업데이트
         };
 
-        // 뒤로 가기 함수
-        function goBack() {
-            window.history.back();
-        }
     </script>
 </body>
 

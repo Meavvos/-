@@ -22,25 +22,62 @@
             </div>
         </div>
     </div>
-    <div class="main-content">
-        <div class="grid-container">
-            <div class="grid-item" onclick="navigateTo('temperature')">
-                <img src="icon/Temperature.png" alt="Temperature">
+    <!-- 4개의 정보 박스 추가 -->
+    <div class="info-container">
+        <div class="info-box">
+            <div class="info-maintext" id="tempInfo">온도</div>
+            <div class="info-white">
+                <div class="info-status">00°C</div>
             </div>
-            <div class="grid-item" onclick="navigateTo('fan')">
-                <img src="icon/fan.svg" alt="fan">
+        </div>
+        <div class="info-box">
+            <div class="info-maintext" id="humidityInfo">습도</div>
+            <div class="info-white">
+                <div class="info-status">0%</div>
             </div>
-            <div class="grid-item" onclick="navigateTo('light')">
-                <img src="icon/Lightbulb.png" alt="Light">
+        </div>
+        <div class="info-box">
+            <div class="info-maintext" id="lightInfo">조도</div>
+            <div class="info-white">
+                <div class="info-status">OFF</div>
             </div>
-            <div class="grid-item" onclick="navigateTo('Soil moisture')">
-                <img src="icon/Soil moisture.png" alt="Light">
-            </div>
-            <div class="grid-item" onclick="openGPTChat()">
-                <img src="icon/gpt.png" alt="GPT">
+        </div>
+        <div class="info-box">
+            <div class="info-maintext" id="moistureInfo">수분</div>
+            <div class="info-white">
+                <div class="info-status">0%</div>
             </div>
         </div>
     </div>
+    <div class="main-content">
+        <div class="grid-container">
+            <div class="grid-item" onclick="openPopup('temperature')">
+                <img src="icon/Temperature.png" alt="Temperature">
+            </div>
+            <div class="grid-item" onclick="openPopup('fan')">
+                <img src="icon/fan.svg" alt="Fan">
+            </div>
+            <div class="grid-item" onclick="openPopup('light')">
+                <img src="icon/Lightbulb.png" alt="Light">
+            </div>
+            <div class="grid-item" onclick="openPopup('soilMoisture')">
+                <img src="icon/Soil moisture.png" alt="Soil Moisture">
+            </div>
+        </div>
+        <div class="grid-item2" onclick="openGPTChat()">
+            <img src="icon/gpt.png" alt="GPT">
+        </div>
+    </div>
+
+    <!-- Popup Structure -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <!-- iframe을 사용하여 관련 페이지를 팝업에 표시 -->
+            <iframe id="popupFrame" src="" width="100%" height="100%" style="border:none;" scrolling="no"></iframe>
+        </div>
+    </div>
+
     <div class="footer">
         <div class="footerbox">
             <div class="footerwritebox">
@@ -61,17 +98,27 @@
             window.open('GPT.html', '_blank', 'width=600,height=800'); // 새 창에서 GPT.html 열기
         }
 
-        // navigateTo 함수 추가
-        function navigateTo(page) {
-            if (page === 'temperature') {
-                window.location.href = 'temperature.html'; // 온도 설정 페이지
-            } else if (page === 'fan') {
-                window.location.href = 'humidity.html'; // 물 설정 페이지
-            } else if (page === 'light') {
-                window.location.href = 'light.html'; // 조명 설정 페이지
-            } else if (page === 'Soil moisture') {
-                window.location.href = 'Soil moisture.html'; // 물 설정 페이지
-            } 
+        function openPopup(contentId) {
+            let targetPage = ''; // iframe에 표시할 페이지 경로
+            if (contentId === 'temperature') {
+                targetPage = 'temperature.html';
+            } else if (contentId === 'fan') {
+                targetPage = 'humidity.html';
+            } else if (contentId === 'light') {
+                targetPage = 'light.html';
+            } else if (contentId === 'soilMoisture') {
+                targetPage = 'Soil moisture.html';
+            }
+
+            // iframe에 페이지 로드 및 팝업 열기
+            document.getElementById('popupFrame').src = targetPage;
+            document.getElementById('popup').style.display = 'block';
+        }
+
+        // 팝업을 닫는 함수
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('popupFrame').src = ''; // iframe의 내용을 초기화
         }
     </script>
 </body>
