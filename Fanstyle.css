@@ -1,0 +1,44 @@
+.switch {
+    position: relative;
+    width: 70px;
+    height: 28px; /* 바의 두께를 더 두껍게 조정 */
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #e57373; /* 꺼진 상태의 색상 */
+    transition: .4s;
+    border-radius: 28px; /* 둥글게 처리해서 타원형으로 만듦 */
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px; /* 바 높이보다 약간 작게 설정 */
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%; /* 원형 모양 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+}
+
+input:checked + .slider {
+    background-color: #4CAF50; /* 켜진 상태의 색상 */
+}
+
+input:checked + .slider:before {
+    transform: translateX(42px); /* 오른쪽 끝으로 이동 */
+}

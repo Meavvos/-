@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPT 채팅</title>
+    <style>
+        body {
+            font-family: "Pretendard", sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .chat-container {
+            max-width: 600px;
+            margin: auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: white;
+        }
+
+        .messages {
+            height: 400px;
+            overflow-y: scroll;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            background-color: #f0f0f0;
+        }
+
+        .input-area {
+            display: flex;
+            padding: 10px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            border-radius: 3px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="chat-container">
+        <div class="messages" id="messages">
+            <!-- 채팅 메시지가 여기에 표시됩니다 -->
+        </div>
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="메시지를 입력하세요..." />
+            <button onclick="sendMessage()">전송</button>
+        </div>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const input = document.getElementById('userInput').value;
+            const messagesDiv = document.getElementById('messages');
+
+            if (!input) return;
+
+            const userMessageDiv = `<div><strong>User:</strong> ${input}</div>`;
+            messagesDiv.innerHTML += userMessageDiv; // 사용자 메시지를 화면에 추가
+
+            try {
+                const response = await fetch('/api/generate-text', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ prompt: input })
+                });
+
+                const data = await response.json();
+
+                if (data.choices) {
+                    const gptMessageDiv = `<div><strong>GPT:</strong> ${data.choices[0].text.trim()}</div>`;
+                    messagesDiv.innerHTML += gptMessageDiv;
+                } else {
+                    const errorDiv = `<div>Error: ${data.error || "Unknown error"}</div>`;
+                    messagesDiv.innerHTML += errorDiv;
+                }
+            } catch (error) {
+                const errorDiv = `<div>Error: Failed to fetch response.</div>`;
+                messagesDiv.innerHTML += errorDiv;
+            }
+
+            // 입력 필드 초기화 및 스크롤 아래로 이동
+            document.getElementById('userInput').value = '';
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+    </script>
+</body>
+
+</html>

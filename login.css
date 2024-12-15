@@ -1,0 +1,124 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+
+.login {
+
+    width: auto;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #b3f174;
+    height: 640px;
+    justify-content: center;
+}
+
+
+.login .white {
+    background-color: #ffffff;
+    border-radius: 18px;
+    height: 420px;
+    position: absolute;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainlogincom {
+    align-items: center;
+    min-height: 349px;
+    position: absolute;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login .logo {
+    height: 158px;
+    width: 280px;
+    display: flex;
+    align-items: center;
+}
+
+.login .idpw {
+    align-items: flex-end;
+    gap: 19px;
+    margin-left: 3.0px;
+    margin-top: 20px;
+    min-height: 79px;
+    width: 285px;
+    display: flex;
+    flex-direction: column;
+}
+
+.idpw .id {
+    align-items: flex-start;
+    display: flex;
+    gap: 36px;
+    margin-right: -2px;
+    min-width: 280px;
+}
+
+.id .idname {
+    font-family: "Pretendard";
+    font-size: var(--font-size-xxs);
+    font-weight: 400;
+    letter-spacing: -0.06px;
+    line-height: normal;
+    min-height: 29px;
+    min-width: 24px;
+    text-align: center;
+}
+
+.login .placeholder {
+    background-color: #f5f5f5;
+    border: 1px solid;
+    border-color: var(--black);
+    height: 30px;
+    width: 180px;
+}
+
+.idpw .pw {
+    align-items: flex-start;
+    display: flex;
+    gap: 29px;
+    margin-right: -2px;
+    min-width: 287px;
+}
+
+.idpw .pwname {
+    font-family: "Pretendard";
+    font-size: var(--font-size-xxs);
+    font-weight: 400;
+    letter-spacing: -0.06px;
+    line-height: normal;
+    min-height: 29px;
+    min-width: 38px;
+    text-align: center;
+}
+
+.button {
+    background-color: #b4f174;
+    border: 2px solid;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    margin-top: 40px;
+    padding: 4px 18px;
+    width: 100px;
+    cursor: pointer;
+}
+
+.login .title {
+    font-family: "Pretendard";
+    font-size: var(--font-size-s);
+    font-weight: 400;
+    letter-spacing: -0.08px;
+    line-height: normal;
+    min-height: 39px;
+    text-align: center;
+    width: 72px;
+}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/logo/favicon.svg">
+    <title>설정 - Farmy</title>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .status {
+            font-size: 20px;
+            color: #4CAF50;
+            /* 기본 상태 - On */
+            margin: 5px 0;
+            transition: color 0.3s ease;
+            /* 색상 전환 애니메이션 */
+        }
+
+        .status.off {
+            color: #f44336;
+            /* Off 상태일 때 */
+        }
+
+        .switch {
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            position: relative;
+            margin-top: 10px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .switch span {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            border-radius: 34px;
+        }
+
+        .switch span:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            border-radius: 50%;
+            transition: 0.4s;
+        }
+
+        input:checked+span {
+            background-color: #4CAF50;
+        }
+
+        input:checked+span:before {
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 id="realTimeTemp">현재 조도: 0°C</h1>
+
+
+        <!-- 조명 상태 표시 및 토글 -->
+        <img src="icon/Lightbulb.png" alt="조명 아이콘" class="icon">
+        <div class="status" id="lightStatus">조명: OFF</div>
+        <label class="switch">
+            <input type="checkbox" id="lightToggle">
+            <span></span>
+        </label>
+
+    </div>
+
+    <script>
+        const lightToggle = document.getElementById('lightToggle');
+        const lightStatus = document.getElementById('lightStatus');
+
+        // Toggle 조명 상태 표시
+        lightToggle.onchange = function () {
+            lightStatus.innerHTML = `조명 상태: ${this.checked ? 'ON' : 'OFF'}`;
+            lightStatus.classList.toggle('off', !this.checked);
+        };
+
+        // 아두이노에서 실시간 정보를 가져오는 함수 (예시)
+        function updateRealTimeData() {
+            const realTimeTemp = Math.floor(Math.random() * 31); // 0도에서 30도 사이의 임의의 온도
+            const humidity = Math.floor(Math.random() * 100); // 0%에서 100% 사이의 임의의 습도
+            const lightStatusText = lightToggle.checked ? 'ON' : 'OFF'; // 조명 상태
+            const moisture = Math.floor(Math.random() * 100); // 0%에서 100% 사이의 임의의 수분
+
+            // 실제 값으로 UI 업데이트
+            document.getElementById('realTimeTemp').innerHTML = `현재 온도: ${realTimeTemp}°C`;
+            document.getElementById('tempInfo').querySelector('.info-status').innerHTML = `(${realTimeTemp} °C)`;
+            document.getElementById('humidityInfo').querySelector('.info-status').innerHTML = `(${humidity}%)`;
+            document.getElementById('lightInfo').querySelector('.info-status').innerHTML = `(${lightStatusText})`;
+            document.getElementById('moistureInfo').querySelector('.info-status').innerHTML = `(${moisture}%)`;
+        }
+
+        // 페이지 로드 시 실시간 온도 및 정보 업데이트
+        window.onload = function () {
+            setInterval(updateRealTimeData, 5000); // 5초마다 실시간 데이터 업데이트
+        };
+
+    </script>
+</body>
+
+</html>
